@@ -1,4 +1,6 @@
 //! tests/health_check.rs
+use sqlx::{Connection, PgConnection};
+use zero2prod::configuration::get_configuration;
 use zero2prod::startup;
 // `tokio::test` is the testing equivalent of `tokio::main`.
 // It also spares you from having to specify the `#[test]` attribute.
@@ -29,6 +31,11 @@ async fn health_check_works() {
 async fn subscribe_returns_a_200_for_valid_form_data() {
     // Arrange
     let app_address = spawn_app();
+    let configuration = get_configuration().expect("Failed to read configuration.");
+    let connection_string = configuration.database.connection_string();
+    let connection = PgConnection::connect(&connection_string)
+        .await
+        .expect("Failed to connect to Postgres.");
     let client = reqwest::Client::new();
     // Act
     let body = "name=le%20guin&email=ursula_le_guin%40gmail.com";
