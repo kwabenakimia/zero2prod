@@ -1,6 +1,6 @@
 //! tests/health_check.rs
 use sqlx::{Connection, PgConnection};
-use zero2prod::configuration::get_configuration;
+use zero2prod::configuration::{self, get_configuration};
 use zero2prod::startup;
 // `tokio::test` is the testing equivalent of `tokio::main`.
 // It also spares you from having to specify the `#[test]` attribute.
