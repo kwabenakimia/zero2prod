@@ -1,10 +1,10 @@
 //! src/main.rs
 //pub mod startup;
+use env_logger::Env;
 use sqlx::PgPool;
 use std::net::TcpListener;
 use zero2prod::configuration::get_configuration;
 use zero2prod::startup::run;
-use env_logger::Env;
 
 #[tokio::main]
 async fn main() -> Result<(), std::io::Error> {

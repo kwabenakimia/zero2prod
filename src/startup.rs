@@ -1,9 +1,9 @@
 use crate::routes::{health_check, subscribe};
 use actix_web::dev::Server;
+use actix_web::middleware::Logger;
 use actix_web::{web, App, HttpServer};
 use sqlx::PgPool;
 use std::net::TcpListener;
-use actix_web::middleware::Logger;
 // We need to mark `run` as public.
 // It is no longer a binary entrypoint, therefore we can mark it as async
 // without having to use any proc-macro incantation.
