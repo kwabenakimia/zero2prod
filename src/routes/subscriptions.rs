@@ -1,8 +1,8 @@
 //! src/routes/subscriptions.rs
 use actix_web::{web, HttpResponse};
+use chrono::Utc;
 use sqlx::PgPool;
 use uuid::Uuid;
-use chrono::Utc;
 
 #[derive(serde::Deserialize)]
 pub struct FormData {
@@ -11,10 +11,10 @@ pub struct FormData {
 }
 
 // Let's start simple: we always return a 200 OK
-pub async fn subscribe(_form: web::Form<FormData>,
+pub async fn subscribe(
+    _form: web::Form<FormData>,
     // Retrieving a connection from the application state!
-    pool : web::Data<PgPool>,
-
+    pool: web::Data<PgPool>,
 ) -> HttpResponse {
     // `Result` has two variants: `Ok` and `Err`.
     // The first for successes, the second for failures.
